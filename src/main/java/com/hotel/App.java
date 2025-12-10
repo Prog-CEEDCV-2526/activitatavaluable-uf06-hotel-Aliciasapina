@@ -186,7 +186,7 @@ public class App {
         System.out.println("\nTipus d'habitació disponibles:");
         System.out.println();
         //TODO:
-         String tipusSeleccionat = null;
+        String tipusSeleccionat = null;
         int opcio = 0;
 
         // Array per ordenar els tipus i facilitar la selecció numèrica (1, 2, 3)
@@ -263,7 +263,7 @@ public class App {
 
             // Preguntar si vol afegir un servei (s/n)
             System.out.print("Vol afegir un servei? (s/n): ");
-            String resposta = sc.nextLine().trim().toLowerCase();
+            String resposta = sc.nextLine().toLowerCase();
 
             if (resposta.equals("s")) {
                 opcioServei = llegirEnter("Seleccione servei (0-4): ");
