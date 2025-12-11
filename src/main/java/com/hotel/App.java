@@ -145,7 +145,7 @@ public class App {
          //TODO      
         // 1. Seleccionar el tipus d'habitació
         String tipusHabitacio = seleccionarTipusHabitacioDisponible();
-        //
+        
     
         if (tipusHabitacio != null) {
             System.out.println(" Tipus d'habitació seleccionat: " + tipusHabitacio);
@@ -244,12 +244,12 @@ public class App {
         // Array per ordenar els serveis i facilitar la selecció numèrica
         String[] serveisArray = {SERVEI_ESMORZAR, SERVEI_GIMNAS, SERVEI_SPA, SERVEI_PISCINA};
 
-        do {
+       
             System.out.println("\nServeis adicionals (0-4):");
             System.out.println();
             
             // 0.finalitzar
-            System.out.println("0. Finalitzar");
+            System.out.println("1. Finalitzar");
             
             // Bucle per mostrar els serveis amb preu
             for (int i = 0; i < serveisArray.length; i++) {
@@ -257,10 +257,10 @@ public class App {
                 float preu = preusServeis.get(nomServei);
                 String estat = serveisSeleccionats.contains(nomServei) ? "": "";
 
-                // Format d'impressió: 1. Esmorzar (10.00€) (AFEGIT)
-                System.out.printf("%d. %s (%.0f€)%s\n", i + 1, nomServei, preu, estat);
+                // Format d'impressió: 2. Esmorzar (10.00€) (AFEGIT)
+                System.out.printf("%d. %s (%.0f€)%s\n", i + 2, nomServei, preu, estat);
             }
-
+        do {
             // Preguntar si vol afegir un servei (s/n)
             System.out.print("Vol afegir un servei? (s/n): ");
             sc.nextLine();
@@ -276,9 +276,9 @@ public class App {
                     } else if (serveisSeleccionats.size() < 4) {
                         // Si no està afegit i en queden, l'afegim
                         serveisSeleccionats.add(serveiTria);
-                        System.out.println(" Servei afegit: '" + serveiTria );
+                        System.out.println("Servei afegit:" + serveiTria );
                     } else {
-                        System.out.println(" No es poden afegir més de 4 serveis addicionals.");
+                        System.out.println("No es poden afegir més de 4 serveis addicionals.");
                     }
                 } else if (opcioServei == 0) {
                     continuar = false; // Finalitza la selecció
