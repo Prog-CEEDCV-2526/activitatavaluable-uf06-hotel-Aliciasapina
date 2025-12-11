@@ -145,7 +145,8 @@ public class App {
          //TODO      
         // 1. Seleccionar el tipus d'habitació
         String tipusHabitacio = seleccionarTipusHabitacioDisponible();
-        
+        //
+    
         if (tipusHabitacio != null) {
             System.out.println(" Tipus d'habitació seleccionat: " + tipusHabitacio);
 
