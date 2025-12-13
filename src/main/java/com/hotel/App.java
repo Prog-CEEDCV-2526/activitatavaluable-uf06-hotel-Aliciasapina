@@ -120,9 +120,9 @@ public class App {
       //  case 2:
       //      alliberarHabitacio();
      //   break;
-      //  case 3:
-      //      consultarDisponibilitat();
-      //  break;
+        case 3:
+            consultarDisponibilitat();
+        break;
       //  case 4:
       //      mostrarDadesReserva(); 
       //  break;
@@ -347,9 +347,61 @@ public class App {
     /**
      * Mostra la disponibilitat actual de les habitacions (lliures i ocupades).
      */
+    public static final Map<String, Integer> TOTAL_HABITACIONS = Map.of(
+        TIPUS_ESTANDARD, 30, 
+        TIPUS_SUITE, 20,     
+        TIPUS_DELUXE, 10     
+    );
     public static void consultarDisponibilitat() {
         // TODO: Mostrar lliures i ocupades
+        
+       System.out.println("\n===== DISPONIBILITAT D'HABITACIONS =====");
+        
+        // Array per ordenar els tipus d'habitació
+        String[] tipusArray = {TIPUS_ESTANDARD, TIPUS_SUITE, TIPUS_DELUXE};
+
+        // 1. Dibuixar l'encapçalament de la taula
+        System.out.println("----------------------------------------");
+        System.out.printf("| %-10s | %-8s | %-8s |\n", "Tipus", "Lliures", "Ocupades");
+        System.out.println("----------------------------------------");
+        
+        // 2. Recórrer els tipus per mostrar les dades
+        for (String tipus : tipusArray) {
+            // Habitacions lliures (Disponibilitat actual)
+            int lliures = disponibilitatHabitacions.getOrDefault(tipus, 0);
+            
+            // Total d'habitacions d'aquest tipus
+            int total = TOTAL_HABITACIONS.getOrDefault(tipus, 0);
+            
+            // Habitacions ocupades = Total - Lliures
+            int ocupades = total - lliures;
+            
+            // Dibuixar la fila amb els valors
+            System.out.printf("| %-10s | %-8d | %-8d |\n", 
+                              tipus, lliures, ocupades);
+        }
+        System.out.println("----------------------------------------");
+
+
+        // --- Reserves Actives (Mostrarem només la disponibilitat demanada en la imatge) ---
+        // Si vols que torni a aparèixer la llista de reserves, descomenta la secció següent:
+        /*
+        System.out.println("\n--- 📅 RESERVES ACTIVES (" + reservesActives.size() + " en total) ---");
+        if (!reservesActives.isEmpty()) {
+            System.out.println("---------------------------------------------------------------------");
+            System.out.printf("| %-10s | %-56s |\n", "CODI", "DETALLS DE LA RESERVA");
+            System.out.println("---------------------------------------------------------------------");
+
+            for (Map.Entry<Integer, String> entrada : reservesActives.entrySet()) {
+                System.out.printf("| %-10d | %-56s |\n", entrada.getKey(), entrada.getValue());
+            }
+            System.out.println("---------------------------------------------------------------------");
+        }
+        */
     }
+    
+        
+    
 
     /**
      * Funció recursiva. Mostra les dades de totes les reserves
