@@ -357,7 +357,7 @@ public class App {
         
         System.out.println("\nReserva trobada!");
         System.out.println("Habitació alliberada correctament.");
-        System.out.println("Disponibilitat actualitzada.")
+        System.out.println("Disponibilitat actualitzada.");
     } else {
         System.out.println("\n❌ Error: No s'ha trobat cap reserva activa amb el codi " + codiACancelar + ".");
     }
