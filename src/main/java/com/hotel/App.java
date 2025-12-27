@@ -117,9 +117,9 @@ public class App {
         case 1:
             reservarHabitacio();
         break;
-      //  case 2:
-      //      alliberarHabitacio();
-     //   break;
+        case 2:
+            alliberarHabitacio();
+        break;
         case 3:
             consultarDisponibilitat();
         break;
@@ -154,6 +154,7 @@ public class App {
             System.out.printf("TOTAL: %.2f€\n", preuFinal);
             int codiGenerat = generarCodiReserva();
             System.out.println("Codi de reserva:"+ codiGenerat);
+            reservesActives.put(codiGenerat, tipusHabitacio);
             disponibilitatHabitacions.put(tipusHabitacio, disponibilitatHabitacions.get(tipusHabitacio) - 1);
             } 
     }
@@ -325,7 +326,7 @@ public class App {
         Random random = new Random();
         int codiGenerat;
         
-        // Bucle para generar un código hasta que sea único
+        //Bucle para generar un código hasta que sea único
         do {
             codiGenerat = random.nextInt(900) + 100;
         } while (codisReservaUtilitzats.contains(codiGenerat));
@@ -340,22 +341,39 @@ public class App {
      * i actualitza la disponibilitat.
      */
     public static void alliberarHabitacio() {
-        System.out.println("\n===== ALLIBERAR HABITACIÓ =====");
-         // TODO: Demanar codi, tornar habitació i eliminar reserva
+    System.out.println("\n===== ALLIBERAR HABITACIÓ =====");
+    int codiACancelar = llegirEnter("Introdueix el codi de reserva: ");
+    
+    // Obtenim el tipus d'habitació directament
+    String tipusHabitacio = reservesActives.remove(codiACancelar);
+
+    if (tipusHabitacio != null) {
+        // Actualitzem la disponibilitat
+        int disponiblesActuals = disponibilitatHabitacions.get(tipusHabitacio);
+        disponibilitatHabitacions.put(tipusHabitacio, disponiblesActuals + 1);
+        
+        // Eliminem el codi dels utilitzats
+        codisReservaUtilitzats.remove(codiACancelar);
+        
+        System.out.println("\nReserva trobada!");
+        System.out.println("Habitació alliberada correctament.");
+        System.out.println("Disponibilitat actualitzada.")
+    } else {
+        System.out.println("\n❌ Error: No s'ha trobat cap reserva activa amb el codi " + codiACancelar + ".");
     }
+}
+    
+    
 
     /**
      * Mostra la disponibilitat actual de les habitacions (lliures i ocupades).
      */
     public static final Map<String, Integer> TOTAL_HABITACIONS = Map.of(
-        TIPUS_ESTANDARD, 30, 
-        TIPUS_SUITE, 20,     
-        TIPUS_DELUXE, 10     
+        TIPUS_ESTANDARD, 30, TIPUS_SUITE, 20, TIPUS_DELUXE, 10     
     );
     public static void consultarDisponibilitat() {
         // TODO: Mostrar lliures i ocupades
-        
-       System.out.println("\n===== DISPONIBILITAT D'HABITACIONS =====");
+        System.out.println("\n===== DISPONIBILITAT D'HABITACIONS =====");
         
         // Array per ordenar els tipus d'habitació
         String[] tipusArray = {TIPUS_ESTANDARD, TIPUS_SUITE, TIPUS_DELUXE};
