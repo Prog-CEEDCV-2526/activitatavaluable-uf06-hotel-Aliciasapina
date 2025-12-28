@@ -403,25 +403,26 @@ public class App {
      */
     public static void llistarReservesPerTipus(int[] codis, String tipus) {
         // TODO: Implementar recursivitat
-        if (codis == null || codis.length == 0) {
-            return;
-        }
-        int codiActual = codis[0];
-
-        ArrayList<String> dades = reserves.get(codiActual);
-        if (dades != null && dades.get(0).equals(tipus)) {
-            System.out.println("\nCodi: " + codiActual);
-            mostrarDadesReserva(codiActual);
-        }
-
-        // Creem un nou array sense el primer element
-        int[] restaDeCodis = new int[codis.length - 1];
-        System.arraycopy(codis, 1, restaDeCodis, 0, codis.length - 1);
-
-        // Crida recursiva amb la resta de l'array
-        llistarReservesPerTipus(restaDeCodis, tipus);
+    if (codis.length == 0) {
+        return;
     }
 
+    int codiActual = codis[0];
+    ArrayList<String> dades = reserves.get(codiActual);
+
+    if (dades != null && dades.get(0).equals(tipus)) {
+        System.out.println("\nCodi de reserva: " + codiActual);
+        mostrarDadesReserva(codiActual);
+    }
+
+    int[] newCodis = new int[codis.length - 1];
+    
+    if (newCodis.length > 0) {
+        System.arraycopy(codis, 1, newCodis, 0, newCodis.length);
+    }
+
+    llistarReservesPerTipus(newCodis, tipus);
+}
     /**
      * Permet consultar els detalls d'una reserva introduint el codi.
      */
@@ -468,7 +469,6 @@ public class App {
             }
 
             if (!hiHaReserves) {
-                // Frase que apareix si no hi ha reserves d'eixe tipus
                 System.out.println("\nNo hi ha cap reserva registrada per al tipus: " + tipusSeleccionat);
             } else {
                 System.out.println("\nReserves de tipus: " + tipusSeleccionat);;
