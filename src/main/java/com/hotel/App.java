@@ -251,15 +251,19 @@ public class App {
             String estat = serveisSeleccionats.contains(nomServei) ? "" : "";
             System.out.printf("%d. %s (%.0f€)%s\n", i + 1, nomServei, preu, estat);
         }
+        
+        
         do {
             // Preguntar si vol afegir un servei (s/n)
             System.out.print("Vol afegir un servei? (s/n): ");
-            String resposta = sc.nextLine().toLowerCase();
-          //  sc.nextLine();
+            String resposta = sc.nextLine();
+            //toLowerCase();
 
             if (resposta.equals("s")) {
-                opcioServei = llegirEnter("Seleccione servei (0-4): ");
-
+                System.out.print("Seleccione servei(0-4): ");
+               // opcioServei = llegirEnter("Seleccione servei (0-4): ");
+                opcioServei = sc.nextInt();
+                sc.nextLine();
                 if (opcioServei >= 1 && opcioServei <= 4) {
                     String serveiTria = serveisArray[opcioServei - 1];
                     if (serveisSeleccionats.contains(serveiTria)) {
@@ -320,7 +324,8 @@ public class App {
         System.out.printf("Serveis: (%s) %.0f€\n", serveisSeleccionats, costServeis);
         System.out.printf("Subtotal: %.0f€\n", subtotal);
         System.out.printf("IVA (%.0f%%): %.0f€\n", IVA * 100, impostos);
-
+        System.out.printf("TOTAL: %.0f€\n", subtotal + impostos);
+   
         return preuFinal;
     }
 
