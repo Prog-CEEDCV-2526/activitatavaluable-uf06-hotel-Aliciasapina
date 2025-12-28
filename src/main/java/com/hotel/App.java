@@ -149,16 +149,16 @@ public class App {
         // TODO
         String tipusHabitacio = seleccionarTipusHabitacioDisponible();
         if (tipusHabitacio != null) {
-            // 2. Selección de servicios y cálculo de precio
+            //Selección de servicios y cálculo de precio
             ArrayList<String> serveis = seleccionarServeis();
             float preuFinal = calcularPreuTotal(tipusHabitacio, serveis);
 
-            // 3. Generar código único (el método debe usar reserves.containsKey)
+            //Generar código único (el método debe usar reserves.containsKey)
             int codiGenerat = generarCodiReserva();
 
             ArrayList<String> dadesReserva = new ArrayList<>();
-            dadesReserva.add(tipusHabitacio); // Posición 0
-            dadesReserva.add(String.valueOf(preuFinal)); // Posición 1
+            dadesReserva.add(tipusHabitacio); 
+            dadesReserva.add(String.valueOf(preuFinal)); 
 
             for (String s : serveis) {
                 dadesReserva.add(s);
@@ -214,7 +214,6 @@ public class App {
             System.out.println((i + 1) + ". " + tipus + " - " + lliures + " disponibles - " + preu + "€");
         }
 
-        // Crida al mètode anterior per obtindre la tria de l'usuari
         String seleccionada = seleccionarTipusHabitacio();
 
         // Comprovem si el tipus existeix i si queden habitacions lliures
@@ -245,7 +244,7 @@ public class App {
         // 0.finalitzar
         System.out.println("0. Finalitzar");
 
-        // Bucle per mostrar els serveis amb preu
+        //Bucle per mostrar els serveis amb preu
         for (int i = 0; i < serveisArray.length; i++) {
             String nomServei = serveisArray[i];
             float preu = preusServeis.get(nomServei);
@@ -255,14 +254,12 @@ public class App {
         
         
         do {
-            // Preguntar si vol afegir un servei (s/n)
+            //Preguntar si vol afegir un servei (s/n)
             System.out.print("\nVol afegir un servei? (s/n): ");
             String resposta = sc.nextLine();
-            //toLowerCase();
 
             if (resposta.equals("s")) {
                 System.out.print("Seleccione servei: ");
-               // opcioServei = llegirEnter("Seleccione servei (0-4): ");
                 opcioServei = sc.nextInt();
                 sc.nextLine();
                 if (opcioServei >= 1 && opcioServei <= 4) {
@@ -270,7 +267,6 @@ public class App {
                     if (serveisSeleccionats.contains(serveiTria)) {
                         System.out.print("\nEl servei '" + serveiTria + "' ja està seleccionat. ");
                     } else if (serveisSeleccionats.size() < 4) {
-                        // Si no està afegit i en queden, l'afegim
                         serveisSeleccionats.add(serveiTria);
                         System.out.println("\nServei afegit: " + serveiTria);
                     } else {
@@ -287,7 +283,6 @@ public class App {
                 System.out.println("Resposta no vàlida. Si us plau, introdueix 's' o 'n'.");
             }
 
-            // Si ja s'han afegit tots els serveis possibles, sortim del bucle
             if (serveisSeleccionats.size() == 4) {
                 System.out.println("\n S'han seleccionat tots els serveis disponibles. Finalitzant la selecció automàticament.");
                 continuar = false;
@@ -306,17 +301,17 @@ public class App {
         // TODO:
         float preuBaseHabitacio = preusHabitacions.getOrDefault(tipusHabitacio, 0.0f);
         float costServeis = 0.0f;
-        // 1. Càlcul del cost total dels serveis
+        //Càlcul del cost total dels serveis
         for (String servei : serveisSeleccionats) {
             costServeis += preusServeis.getOrDefault(servei, 0.0f);
         }
-        // 2. Càlcul del cost de l'habitació
+        //Càlcul del cost de l'habitació
         float costHabitacio = preuBaseHabitacio;
-        // 3. Càlcul del subtotal
+        //Càlcul del subtotal
         float subtotal = costHabitacio + costServeis;
-        // 4. Càlcul del total d'IVA
+        //Càlcul del total d'IVA
         float impostos = subtotal * IVA;
-        // 5. Càlcul del preu final
+        //Càlcul del preu final
         float preuFinal = subtotal + impostos;
 
         // Mostra un desglossament detallat
@@ -357,7 +352,7 @@ public class App {
         if (reserves.containsKey(codi)) {
             String tipusHabitacio = reserves.get(codi).get(0);
             reserves.remove(codi);
-            // Actualitzem disponibilitat
+            //Actualitzem disponibilitat
             disponibilitatHabitacions.put(tipusHabitacio, disponibilitatHabitacions.get(tipusHabitacio) + 1);
 
             System.out.println("\nReserva trobada!");
@@ -371,8 +366,6 @@ public class App {
     /**
      * Mostra la disponibilitat actual de les habitacions (lliures i ocupades).
      */
-    // public static final Map<String, Integer> TOTAL_HABITACIONS = Map.of(
-    // TIPUS_ESTANDARD, 30, TIPUS_SUITE, 20, TIPUS_DELUXE, 10);
 
     public static void consultarDisponibilitat() {
         // TODO: Mostrar lliures i ocupades
@@ -391,7 +384,6 @@ public class App {
 
             int ocupades = total - lliures;
 
-            // Alineación a la izquierda para que las columnas no se desplacen
             System.out.printf("%-15s %-10d %-10d\n", tipus, lliures, ocupades);
         }
         System.out.println("----------------------------------------");
@@ -459,7 +451,7 @@ public class App {
         if (opcio >= 1 && opcio <= tipusArray.length) {
             String tipusSeleccionat = tipusArray[opcio - 1];
             
-            // Verifiquem si hi ha alguna reserva d'aquest tipus abans de llistar
+            //Verifiquem si hi ha alguna reserva d'aquest tipus abans de llistar
             boolean hiHaReserves = false;
             for (ArrayList<String> dades : reserves.values()) {
                 if (dades.get(0).equals(tipusSeleccionat)) {
@@ -496,14 +488,13 @@ public class App {
         if (dades == null)
             return;
 
-        String tipus = dades.get(0); // Posición 0
-        String preu = dades.get(1); // Posición 1
+        String tipus = dades.get(0); 
+        String preu = dades.get(1); 
 
         System.out.println("·Tipus d'habitació: " + tipus);
         System.out.println("·Cost total: " + preu + "€");
         System.out.println("·Serveis addicionals:");
 
-        // Los servicios empiezan en la posición 2
         if (dades.size() <= 2) {
             System.out.println(" (Cap servei)");
         } else {
