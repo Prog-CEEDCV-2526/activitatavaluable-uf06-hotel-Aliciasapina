@@ -368,7 +368,7 @@ public class App {
      */
 
     public static void consultarDisponibilitat() {
-        // TODO: Mostrar lliures i ocupades
+        // TODO: Mostrar lliures i ocupades __
         System.out.println("\n===== DISPONIBILITAT D'HABITACIONS =====");
         String[] tipusArray = { TIPUS_ESTANDARD, TIPUS_SUITE, TIPUS_DELUXE };
 
@@ -422,9 +422,10 @@ public class App {
         System.out.println("\n===== CONSULTAR RESERVA =====");
         // TODO: Mostrar dades d'una reserva concreta
         int codi = llegirEnter("Introdueix el codi de reserva: ");
-        System.out.println("\nDades de la reserva:");
+      
 
         if (reserves.containsKey(codi)) {
+            System.out.println("\nDades de la reserva:");
             mostrarDadesReserva(codi);
         } else {
             System.out.println("\nNo s'ha trobat cap reserva amb aquest codi.");
